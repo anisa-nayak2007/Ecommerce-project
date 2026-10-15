@@ -31,11 +31,72 @@ function saveLocalOrders(orders) {
   localStorage.setItem("anisa_orders", JSON.stringify(orders));
 }
 
+// User Profile Default Mock
+const DEFAULT_USER_PROFILE = {
+  name: "Sophia Reynolds",
+  email: "sophia.r@example.com",
+  phone: "+1 (555) 234-5678",
+  memberTier: "Atelier Connoisseur",
+  memberSince: "November 2024",
+  loyaltyPoints: 480,
+  sizingPreferences: {
+    topSize: "S",
+    trouserSize: "32",
+    fitPreference: "Relaxed / Oversized",
+    measurementUnit: "inches"
+  },
+  savedAddresses: [
+    {
+      id: 1,
+      title: "Primary Residence",
+      name: "Sophia Reynolds",
+      address: "742 Evergreen Terrace, Apt 4B",
+      city: "Brooklyn",
+      state: "New York",
+      postalCode: "11201",
+      country: "United States",
+      isDefault: true
+    },
+    {
+      id: 2,
+      title: "Design Studio",
+      name: "Sophia Reynolds",
+      address: "185 Mercer St, Floor 5",
+      city: "New York",
+      state: "New York",
+      postalCode: "10012",
+      country: "United States",
+      isDefault: false
+    }
+  ],
+  savedPaymentMethods: [
+    {
+      id: 1,
+      brand: "Mastercard",
+      last4: "4242",
+      exp: "12/28",
+      isDefault: true
+    }
+  ]
+};
+
+function getLocalUserProfile() {
+  const stored = localStorage.getItem("anisa_user_profile");
+  if (!stored) {
+    localStorage.setItem("anisa_user_profile", JSON.stringify(DEFAULT_USER_PROFILE));
+    return DEFAULT_USER_PROFILE;
+  }
+  return JSON.parse(stored);
+}
+
+function saveLocalUserProfile(profile) {
+  localStorage.setItem("anisa_user_profile", JSON.stringify(profile));
+}
+
 export const API = {
   // 1. Fetch Products with Filters & Sorting
   async getProducts(params = {}) {
     if (CONFIG.USE_MOCK_API) {
-      // Simulate light async network delay
       await new Promise(r => setTimeout(r, 60));
       let products = [...getLocalStore()];
 
@@ -85,7 +146,6 @@ export const API = {
       return { success: true, data: products };
     }
 
-    // Live Backend Call
     const query = new URLSearchParams(params).toString();
     const res = await fetch(`${CONFIG.API_BASE_URL}/products?${query}`);
     return await res.json();
@@ -142,7 +202,6 @@ export const API = {
       await new Promise(r => setTimeout(r, 120));
       const products = getLocalStore();
 
-      // Check and deduct stock
       for (const item of orderPayload.items) {
         for (const prod of products) {
           const variant = prod.variants.find(v => v.id === item.variantId || v.sku === item.sku);
@@ -203,7 +262,39 @@ export const API = {
     return await res.json();
   },
 
-  // 7. Admin: Get Orders
+  // 7. User Profile Management
+  async getUserProfile() {
+    if (CONFIG.USE_MOCK_API) {
+      return { success: true, data: getLocalUserProfile() };
+    }
+    const res = await fetch(`${CONFIG.API_BASE_URL}/user/profile`);
+    return await res.json();
+  },
+
+  async updateUserProfile(updatedFields) {
+    if (CONFIG.USE_MOCK_API) {
+      const current = getLocalUserProfile();
+      const updated = { ...current, ...updatedFields };
+      saveLocalUserProfile(updated);
+      return { success: true, data: updated };
+    }
+    const res = await fetch(`${CONFIG.API_BASE_URL}/user/profile`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedFields)
+    });
+    return await res.json();
+  },
+
+  async getUserOrders() {
+    if (CONFIG.USE_MOCK_API) {
+      return { success: true, data: getLocalOrders() };
+    }
+    const res = await fetch(`${CONFIG.API_BASE_URL}/user/orders`);
+    return await res.json();
+  },
+
+  // 8. Admin: Get Orders
   async adminGetOrders() {
     if (CONFIG.USE_MOCK_API) {
       return { success: true, data: getLocalOrders() };
@@ -212,7 +303,7 @@ export const API = {
     return await res.json();
   },
 
-  // 8. Admin: Update Order Status
+  // 9. Admin: Update Order Status
   async adminUpdateOrderStatus(orderNumber, status) {
     if (CONFIG.USE_MOCK_API) {
       const orders = getLocalOrders();
@@ -233,7 +324,7 @@ export const API = {
     return await res.json();
   },
 
-  // 9. Admin: Update Stock
+  // 10. Admin: Update Stock
   async adminUpdateStock(variantId, newStock) {
     if (CONFIG.USE_MOCK_API) {
       const products = getLocalStore();
@@ -261,7 +352,7 @@ export const API = {
     return await res.json();
   },
 
-  // 10. Admin: Create Product
+  // 11. Admin: Create Product
   async adminCreateProduct(productData) {
     if (CONFIG.USE_MOCK_API) {
       const products = getLocalStore();

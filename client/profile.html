@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Account & Orders &mdash; ANISA STUDIO</title>
+  <meta name="description" content="Manage your order history, track live shipments, configure custom sizing preferences, and manage saved addresses.">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="css/custom-theme.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body class="bg-light">
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar text-center">
+    <div class="container d-flex justify-content-between align-items-center">
+      <span class="d-none d-md-inline">Atelier Client Portal &bull; VIP Member Care</span>
+      <span class="mx-auto mx-md-0">Complimentary Express Shipping on Orders Over $100 &mdash; Code: <strong>FREESHIP</strong></span>
+      <span class="d-none d-md-inline"><a href="admin.html" class="text-white text-decoration-none">Merchant Portal &rarr;</a></span>
+    </div>
+  </div>
+
+  <!-- Luxury Navbar -->
+  <nav class="navbar navbar-expand-lg luxury-navbar sticky-top">
+    <div class="container py-2">
+      <a class="navbar-brand brand-logo me-4" href="index.html">
+        ANISA <span class="fw-light">STUDIO</span>
+      </a>
+
+      <div class="collapse navbar-collapse" id="navbarMainContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link nav-link-custom" href="index.html">Storefront</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" href="index.html#catalogSection">Collection</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom active" href="profile.html">My Account</a></li>
+        </ul>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <a href="profile.html" class="header-action-btn text-dark" title="My Account">
+          <i class="bi bi-person-fill"></i>
+        </a>
+        <a href="admin.html" class="header-action-btn" title="Merchant Admin Portal">
+          <i class="bi bi-sliders"></i>
+        </a>
+        <button class="header-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas" aria-label="Shopping Bag">
+          <i class="bi bi-bag"></i>
+          <span class="cart-count-badge cart-badge-count" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Profile Content Area -->
+  <main class="py-5">
+    <div class="container">
+      
+      <!-- Profile Header Summary Banner -->
+      <div class="card border-0 shadow-sm p-4 p-md-5 mb-5 bg-white rounded-1">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-4">
+          <div class="d-flex align-items-center gap-4">
+            <div class="rounded-circle bg-dark text-white d-flex align-items-center justify-content-center fw-bold fs-3 shadow-sm" style="width: 76px; height: 76px;" id="profileAvatarInitials">
+              SR
+            </div>
+            <div>
+              <div class="d-flex align-items-center gap-2 mb-1">
+                <h2 class="font-editorial fs-3 mb-0" id="profileHeaderName">Sophia Reynolds</h2>
+                <span class="badge bg-dark small" id="profileHeaderTier">Atelier Connoisseur</span>
+              </div>
+              <div class="text-muted small mb-1" id="profileHeaderEmail">sophia.r@example.com</div>
+              <span class="text-muted" style="font-size: 0.78rem;" id="profileMemberSince">Client since November 2024</span>
+            </div>
+          </div>
+
+          <!-- Loyalty & Stats Box -->
+          <div class="d-flex gap-4 border-start-md ps-md-4">
+            <div>
+              <span class="small text-muted text-uppercase fw-semibold d-block">Rewards Balance</span>
+              <strong class="fs-4 font-sans text-dark" id="profileLoyaltyPoints">480 Pts</strong>
+              <div class="text-muted" style="font-size: 0.72rem;">($24.00 Credit Value)</div>
+            </div>
+            <div>
+              <span class="small text-muted text-uppercase fw-semibold d-block">Total Orders</span>
+              <strong class="fs-4 font-sans text-dark" id="profileOrdersCount">2</strong>
+              <div class="text-muted" style="font-size: 0.72rem;">All Fulfilled</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Account Navigation Pills -->
+      <ul class="nav nav-pills mb-4 gap-2 border-bottom pb-3" id="profileNavTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active rounded-1 px-4 fw-semibold" id="tabOrdersBtn" data-bs-toggle="pill" data-bs-target="#panelOrders" type="button" role="tab">
+            <i class="bi bi-box-seam me-2"></i> Orders & Tracking
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-1 px-4 fw-semibold" id="tabSizingBtn" data-bs-toggle="pill" data-bs-target="#panelSizing" type="button" role="tab">
+            <i class="bi bi-rulers me-2"></i> Sizing & Fit Profile
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-1 px-4 fw-semibold" id="tabAddressesBtn" data-bs-toggle="pill" data-bs-target="#panelAddresses" type="button" role="tab">
+            <i class="bi bi-geo-alt me-2"></i> Saved Addresses
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-1 px-4 fw-semibold" id="tabAccountBtn" data-bs-toggle="pill" data-bs-target="#panelAccount" type="button" role="tab">
+            <i class="bi bi-shield-check me-2"></i> Personal Details
+          </button>
+        </li>
+      </ul>
+
+      <!-- Tab Content Panels -->
+      <div class="tab-content" id="profileTabContent">
+
+        <!-- Panel 1: Orders & Live Tracking -->
+        <div class="tab-pane fade show active" id="panelOrders" role="tabpanel">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="font-editorial fs-5 mb-0">Order History & Shipment Tracking</h5>
+            <span class="small text-muted">Real-time status updates from FedEx / UPS</span>
+          </div>
+
+          <div id="profileOrdersList">
+            <!-- Populated by profile.js -->
+          </div>
+        </div>
+
+        <!-- Panel 2: Sizing & Fit Preferences -->
+        <div class="tab-pane fade" id="panelSizing" role="tabpanel">
+          <div class="card border-0 shadow-sm p-4 p-md-5 bg-white rounded-1">
+            <div class="mb-4">
+              <h5 class="font-editorial fs-5 mb-1">Personal Sizing & Tailoring Advisor</h5>
+              <p class="text-muted small">Configure your body measurements and silhouette preferences to auto-highlight your ideal size on all product detail pages.</p>
+            </div>
+
+            <form id="profileSizingForm">
+              <div class="row g-4 mb-4">
+                <div class="col-md-6">
+                  <label for="prefTopSize" class="form-label small fw-semibold">Standard Top / Outerwear Size</label>
+                  <select class="form-select" id="prefTopSize">
+                    <option value="XS">Extra Small (XS &bull; Chest 32-34")</option>
+                    <option value="S">Small (S &bull; Chest 35-37")</option>
+                    <option value="M">Medium (M &bull; Chest 38-40")</option>
+                    <option value="L">Large (L &bull; Chest 41-43")</option>
+                    <option value="XL">Extra Large (XL &bull; Chest 44-46")</option>
+                    <option value="XXL">Double Large (XXL &bull; Chest 47-49")</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="prefTrouserSize" class="form-label small fw-semibold">Trouser & Denim Waist</label>
+                  <select class="form-select" id="prefTrouserSize">
+                    <option value="28">Waist 28" (71 cm)</option>
+                    <option value="30">Waist 30" (76 cm)</option>
+                    <option value="32">Waist 32" (81 cm)</option>
+                    <option value="34">Waist 34" (86 cm)</option>
+                    <option value="36">Waist 36" (91 cm)</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="prefFitSilhouette" class="form-label small fw-semibold">Preferred Silhouette / Drape</label>
+                  <select class="form-select" id="prefFitSilhouette">
+                    <option value="Relaxed / Oversized">Relaxed / Architectural Oversized</option>
+                    <option value="Tailored / Slim">Sharp Tailored / Modern Slim</option>
+                    <option value="Standard Regular">Standard Regular Classic Fit</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold">Measurement System</label>
+                  <div class="d-flex gap-3 pt-2">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="measUnit" id="unitIn" value="inches" checked>
+                      <label class="form-check-label small" for="unitIn">Imperial (Inches)</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="measUnit" id="unitCm" value="cm">
+                      <label class="form-check-label small" for="unitCm">Metric (Centimeters)</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-luxury-dark px-4 py-3">
+                <i class="bi bi-check2-circle me-1"></i> Save Sizing Preferences
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Panel 3: Saved Addresses -->
+        <div class="tab-pane fade" id="panelAddresses" role="tabpanel">
+          <div class="card border-0 shadow-sm p-4 p-md-5 bg-white rounded-1">
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+              <div>
+                <h5 class="font-editorial fs-5 mb-1">Saved Shipping Addresses</h5>
+                <p class="text-muted small mb-0">Manage delivery locations for streamlined 1-click checkout.</p>
+              </div>
+              <button class="btn btn-luxury-dark btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#addAddressModal">
+                <i class="bi bi-plus-lg me-1"></i> Add New Address
+              </button>
+            </div>
+
+            <div class="row" id="profileAddressGrid">
+              <!-- Populated by profile.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 4: Personal Details & Password -->
+        <div class="tab-pane fade" id="panelAccount" role="tabpanel">
+          <div class="card border-0 shadow-sm p-4 p-md-5 bg-white rounded-1">
+            <h5 class="font-editorial fs-5 mb-1">Personal Contact Information</h5>
+            <p class="text-muted small mb-4">Update your profile name, email, and phone contact for order updates.</p>
+
+            <form id="profileAccountForm">
+              <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                  <label for="accNameInput" class="form-label small fw-semibold">Full Legal Name</label>
+                  <input type="text" class="form-control" id="accNameInput" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="accEmailInput" class="form-label small fw-semibold">Email Address</label>
+                  <input type="email" class="form-control" id="accEmailInput" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="accPhoneInput" class="form-label small fw-semibold">Mobile Phone (For Courier SMS)</label>
+                  <input type="tel" class="form-control" id="accPhoneInput">
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-luxury-dark px-4 py-3">
+                <i class="bi bi-save me-1"></i> Update Personal Information
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Add New Address Modal -->
+  <div class="modal fade" id="addAddressModal" tabindex="-1" aria-labelledby="addAddressModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 rounded-0 shadow-lg">
+        <div class="modal-header border-bottom p-4">
+          <h5 class="modal-title font-editorial fs-5" id="addAddressModalLabel">Add Delivery Address</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="addAddressForm">
+          <div class="modal-body p-4">
+            <div class="row g-3">
+              <div class="col-12">
+                <label for="newAddrTitle" class="form-label small fw-semibold">Address Label (e.g. Home, Loft, Studio)</label>
+                <input type="text" class="form-control" id="newAddrTitle" placeholder="Loft Residence" required>
+              </div>
+              <div class="col-12">
+                <label for="newAddrName" class="form-label small fw-semibold">Recipient Name</label>
+                <input type="text" class="form-control" id="newAddrName" placeholder="Sophia Reynolds" required>
+              </div>
+              <div class="col-12">
+                <label for="newAddrStreet" class="form-label small fw-semibold">Street Address</label>
+                <input type="text" class="form-control" id="newAddrStreet" placeholder="124 Grand St, Apt 3" required>
+              </div>
+              <div class="col-md-6">
+                <label for="newAddrCity" class="form-label small fw-semibold">City</label>
+                <input type="text" class="form-control" id="newAddrCity" placeholder="New York" required>
+              </div>
+              <div class="col-md-3">
+                <label for="newAddrState" class="form-label small fw-semibold">State</label>
+                <input type="text" class="form-control" id="newAddrState" placeholder="NY" required>
+              </div>
+              <div class="col-md-3">
+                <label for="newAddrZip" class="form-label small fw-semibold">ZIP Code</label>
+                <input type="text" class="form-control" id="newAddrZip" placeholder="10013" required>
+              </div>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="newAddrDefaultCheck">
+                  <label class="form-check-label small" for="newAddrDefaultCheck">
+                    Set as my default shipping address
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer border-top p-3">
+            <button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-luxury-dark btn-sm">Save Address</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Universal Offcanvas Slide-Over Cart Drawer -->
+  <div class="offcanvas offcanvas-end cart-drawer" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header cart-drawer-header">
+      <h5 class="offcanvas-title cart-drawer-title" id="cartOffcanvasLabel">
+        Shopping Bag (<span class="cart-badge-count">0</span>)
+      </h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    
+    <div class="offcanvas-body cart-drawer-body">
+      <!-- Free Shipping Meter -->
+      <div class="free-shipping-bar">
+        <div class="small mb-2 text-center" id="freeShippingText">
+          Add $100.00 more to qualify for Free Shipping
+        </div>
+        <div class="progress progress-luxury">
+          <div class="progress-bar progress-bar-luxury" id="freeShippingProgress" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div id="cartDrawerEmpty" class="text-center py-5 d-none">
+        <i class="bi bi-bag-x fs-1 text-muted mb-3 d-block"></i>
+        <h6 class="font-editorial mb-2">Your Bag is Empty</h6>
+        <p class="text-muted small mb-4">You haven't added any garments to your bag yet.</p>
+        <button class="btn btn-luxury-dark" data-bs-dismiss="offcanvas">Explore Collection</button>
+      </div>
+
+      <!-- Cart Items Container -->
+      <div id="cartDrawerItems"></div>
+    </div>
+
+    <!-- Cart Footer with Totals & Checkout Trigger -->
+    <div class="cart-drawer-footer" id="cartDrawerFooter">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <span class="text-muted small">Subtotal</span>
+        <span class="fw-bold fs-5" id="cartDrawerSubtotal">$0.00</span>
+      </div>
+      <p class="text-muted" style="font-size: 0.75rem;">Shipping and taxes calculated at checkout.</p>
+      <a href="checkout.html" class="btn btn-luxury-dark w-100 py-3">
+        Proceed to Checkout &rarr;
+      </a>
+    </div>
+  </div>
+
+  <!-- Luxury Footer -->
+  <footer class="luxury-footer mt-5">
+    <div class="container text-center small text-muted">
+      &copy; 2026 ANISA STUDIO. All Rights Reserved. &bull; <a href="index.html" class="text-muted">Return to Storefront</a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5.3 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- ES6 Modules -->
+  <script type="module" src="js/cart.js"></script>
+  <script type="module" src="js/profile.js"></script>
+</body>
+</html>
