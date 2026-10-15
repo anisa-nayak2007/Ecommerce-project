@@ -370,9 +370,11 @@ export const API = {
       return { success: true, data: newProduct };
     }
 
+    const isFormData = (typeof FormData !== "undefined") && (productData instanceof FormData);
     const res = await fetch(`${CONFIG.API_BASE_URL}/admin/products`, {
       method: "POST",
-      body: productData // FormData
+      headers: isFormData ? undefined : { "Content-Type": "application/json" },
+      body: isFormData ? productData : JSON.stringify(productData)
     });
     return await res.json();
   }

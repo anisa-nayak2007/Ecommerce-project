@@ -1,8 +1,11 @@
 // Client Configuration & Environment Settings
+const isDevPreview = typeof window !== 'undefined' && window.location.port === '3000';
+
 export const CONFIG = {
-  // Set to false when connecting to the live Express REST API
-  USE_MOCK_API: true,
-  API_BASE_URL: "http://localhost:5000/api",
+  USE_MOCK_API: false,
+  // When testing with standalone preview server on port 3000, call backend on port 5000.
+  // On Vercel or when served directly from Express on port 5000, use relative '/api'.
+  API_BASE_URL: isDevPreview ? "http://localhost:5000/api" : "/api",
   FREE_SHIPPING_THRESHOLD: 100.00,
   STANDARD_SHIPPING_FEE: 5.00,
   EXPRESS_SHIPPING_FEE: 15.00,
