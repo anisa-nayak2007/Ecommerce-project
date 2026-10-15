@@ -1,0 +1,330 @@
+/* ==========================================================================
+   ANISA STUDIO - LUXURY APPAREL DESIGN SYSTEM (BOOTSTRAP 5.3 ENHANCEMENTS)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  /* Editorial Fashion Palette */
+  --color-obsidian: #111215;
+  --color-obsidian-soft: #1B1D22;
+  --color-charcoal: #2A2D34;
+  --color-border: #E8E5E0;
+  --color-border-dark: #3A3D45;
+  --color-cream: #FAF8F5;
+  --color-cream-subtle: #F3EFEA;
+  --color-sand: #E6DFD5;
+  --color-camel: #C19A6B;
+  --color-accent-terracotta: #BD6B53;
+  --color-success: #2E7D32;
+  --color-danger: #D32F2F;
+
+  /* Typography */
+  --font-editorial: 'Syne', -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Elevation & Motion */
+  --transition-smooth: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.12);
+}
+
+/* Base Resets & Global Typography */
+body {
+  font-family: var(--font-sans);
+  color: var(--color-obsidian);
+  background-color: #FFFFFF;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, .font-editorial {
+  font-family: var(--font-editorial);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: var(--color-obsidian);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+a {
+  color: var(--color-obsidian);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+a:hover {
+  color: var(--color-camel);
+}
+
+/* Ticker Announcement Bar */
+.announcement-bar {
+  background-color: var(--color-obsidian);
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 8px 0;
+}
+
+/* Glassmorphic Fashion Navbar */
+.luxury-navbar {
+  background-color: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  transition: var(--transition-smooth);
+  z-index: 1030;
+}
+
+.brand-logo {
+  font-family: var(--font-editorial);
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-obsidian);
+}
+
+.brand-logo:hover {
+  color: var(--color-obsidian);
+}
+
+.nav-link-custom {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  color: var(--color-obsidian);
+  position: relative;
+}
+
+.nav-link-custom::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 14px;
+  right: 14px;
+  height: 2px;
+  background-color: var(--color-obsidian);
+  transform: scaleX(0);
+  transition: var(--transition-smooth);
+}
+
+.nav-link-custom:hover::after,
+.nav-link-custom.active::after {
+  transform: scaleX(1);
+}
+
+/* Header Action Icons & Badges */
+.header-action-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-obsidian);
+  padding: 6px 10px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  transition: var(--transition-smooth);
+}
+
+.header-action-btn:hover {
+  color: var(--color-camel);
+  transform: translateY(-1px);
+}
+
+.cart-count-badge {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  background-color: var(--color-obsidian);
+  color: #FFFFFF;
+  font-size: 0.65rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+/* Luxury Editorial Buttons */
+.btn-luxury-dark {
+  background-color: var(--color-obsidian);
+  color: #FFFFFF;
+  border: 1px solid var(--color-obsidian);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 0;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-luxury-dark:hover {
+  background-color: #262930;
+  border-color: #262930;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-luxury-outline {
+  background-color: transparent;
+  color: var(--color-obsidian);
+  border: 1px solid var(--color-obsidian);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 13px 26px;
+  border-radius: 0;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-luxury-outline:hover {
+  background-color: var(--color-obsidian);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero-banner {
+  position: relative;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-cream-subtle);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(17, 18, 21, 0.72) 0%, rgba(17, 18, 21, 0.25) 55%, rgba(17, 18, 21, 0.05) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #FFFFFF;
+  max-width: 650px;
+}
+
+.hero-tagline {
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-sand);
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  line-height: 1.08;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 400;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+/* Category Filter Pills */
+.category-pill {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: 30px;
+  border: 1px solid var(--color-border);
+  background: #FFFFFF;
+  color: var(--color-obsidian);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.category-pill:hover,
+.category-pill.active {
+  background: var(--color-obsidian);
+  color: #FFFFFF;
+  border-color: var(--color-obsidian);
+}
+
+/* Custom Footer */
+.luxury-footer {
+  background-color: var(--color-obsidian);
+  color: #A0A3A8;
+  padding: 70px 0 30px 0;
+  border-top: 1px solid var(--color-charcoal);
+  font-size: 0.88rem;
+}
+
+.footer-heading {
+  font-family: var(--font-editorial);
+  color: #FFFFFF;
+  font-size: 0.88rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  font-weight: 700;
+}
+
+.footer-link {
+  color: #A0A3A8;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.86rem;
+  transition: var(--transition-smooth);
+}
+
+.footer-link:hover {
+  color: #FFFFFF;
+  transform: translateX(3px);
+}
+
+.newsletter-input {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+  border-radius: 0;
+  padding: 12px 16px;
+  font-size: 0.88rem;
+}
+
+.newsletter-input:focus {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--color-sand);
+  color: #FFFFFF;
+  box-shadow: none;
+}

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merchant Console &mdash; ANISA STUDIO</title>
+  <meta name="description" content="Merchant administrative console for apparel inventory, local image uploads, variant matrix generation, and order fulfillment.">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="css/custom-theme.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body class="bg-light">
+
+  <!-- Admin Navbar -->
+  <header class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+    <div class="container">
+      <a class="navbar-brand brand-logo text-white" href="admin.html">
+        ANISA <span class="fw-light">STUDIO</span> <span class="badge bg-secondary ms-2 fs-6 fw-normal">Ops Console</span>
+      </a>
+
+      <div class="d-flex align-items-center gap-3">
+        <a href="index.html" class="btn btn-sm btn-outline-light">
+          <i class="bi bi-box-arrow-up-right me-1"></i> Live Storefront
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="py-5">
+    <div class="container">
+
+      <!-- Admin Navigation Tabs -->
+      <ul class="nav nav-pills mb-4 gap-2" id="adminTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active rounded-1 px-4 fw-semibold" id="tabInventory" data-bs-toggle="pill" data-bs-target="#panelInventory" type="button" role="tab">
+            <i class="bi bi-boxes me-2"></i> Inventory Ledger
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-1 px-4 fw-semibold" id="tabAddProduct" data-bs-toggle="pill" data-bs-target="#panelAddProduct" type="button" role="tab">
+            <i class="bi bi-plus-circle me-2"></i> New Garment & SKU Matrix
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-1 px-4 fw-semibold" id="tabOrders" data-bs-toggle="pill" data-bs-target="#panelOrders" type="button" role="tab">
+            <i class="bi bi-receipt me-2"></i> Customer Orders
+          </button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="adminTabContent">
+
+        <!-- 1. Inventory Ledger Tab -->
+        <div class="tab-pane fade show active" id="panelInventory" role="tabpanel">
+          <div class="card border-0 shadow-sm p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+              <div>
+                <h5 class="font-editorial fs-5 mb-1">Apparel Inventory & Stock Levels</h5>
+                <p class="text-muted small mb-0">Adjust stock quantities per SKU variant in real-time.</p>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+                <thead class="table-light small text-uppercase">
+                  <tr>
+                    <th>SKU Reference</th>
+                    <th>Garment Title</th>
+                    <th>Colorway</th>
+                    <th>Size</th>
+                    <th>Stock Status</th>
+                    <th>Update Quantity</th>
+                  </tr>
+                </thead>
+                <tbody id="adminInventoryTableBody">
+                  <!-- Populated by admin.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Add New Product Tab -->
+        <div class="tab-pane fade" id="panelAddProduct" role="tabpanel">
+          <div class="card border-0 shadow-sm p-4">
+            <h5 class="font-editorial fs-5 mb-1">Create Apparel Style & SKU Matrix</h5>
+            <p class="text-muted small mb-4">Define product details, upload lookbook imagery to the local directory, and generate the size/color SKU permutation matrix.</p>
+
+            <form id="adminProductForm">
+              <div class="row g-4 mb-4">
+                
+                <!-- Basic Info -->
+                <div class="col-md-6">
+                  <label for="adminProductTitle" class="form-label small fw-semibold">Garment Title *</label>
+                  <input type="text" class="form-control" id="adminProductTitle" placeholder="e.g. Tailored Pleated Wool Trench" required>
+                </div>
+
+                <div class="col-md-3">
+                  <label for="adminProductCategory" class="form-label small fw-semibold">Category *</label>
+                  <select class="form-select" id="adminProductCategory" required>
+                    <option value="Outerwear">Outerwear</option>
+                    <option value="Knitwear">Knitwear</option>
+                    <option value="Tops & Shirts">Tops & Shirts</option>
+                    <option value="Trousers & Denim">Trousers & Denim</option>
+                    <option value="Accessories">Accessories</option>
+                  </select>
+                </div>
+
+                <div class="col-md-3">
+                  <label for="adminProductGender" class="form-label small fw-semibold">Department *</label>
+                  <select class="form-select" id="adminProductGender" required>
+                    <option value="unisex">Unisex</option>
+                    <option value="women">Women</option>
+                    <option value="men">Men</option>
+                  </select>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="adminProductPrice" class="form-label small fw-semibold">Base Price ($ USD) *</label>
+                  <input type="number" step="0.01" class="form-control" id="adminProductPrice" placeholder="185.00" required>
+                </div>
+
+                <div class="col-md-8">
+                  <label for="adminProductDescription" class="form-label small fw-semibold">Editorial Description</label>
+                  <textarea class="form-control" id="adminProductDescription" rows="2" placeholder="Cut from luxurious heavyweight virgin wool with horn buttons..."></textarea>
+                </div>
+
+                <!-- Local File Upload Dropzone -->
+                <div class="col-12">
+                  <label class="form-label small fw-semibold">Product Photography (Saved to Local Uploads Folder)</label>
+                  <div class="upload-dropzone" id="adminUploadDropzone">
+                    <i class="bi bi-cloud-arrow-up fs-2 text-muted mb-2 d-block"></i>
+                    <h6 class="font-editorial mb-1">Click to browse or drag photos here</h6>
+                    <span class="small text-muted">Supports JPG, PNG, WEBP (Max 5MB each)</span>
+                    <input type="file" id="adminFileInput" class="d-none" multiple accept="image/*">
+                  </div>
+                  <div class="mt-3" id="adminImagePreviewGrid">
+                    <!-- Preview thumbnails appear here -->
+                  </div>
+                </div>
+
+                <!-- Matrix Generator Controls -->
+                <div class="col-12 border-top pt-4">
+                  <h6 class="font-editorial fs-6 mb-3">1. Select Available Colorways</h6>
+                  <div class="d-flex flex-wrap gap-3 mb-4">
+                    <label class="form-check-label d-flex align-items-center gap-2 border p-2 px-3 rounded-1 cursor-pointer">
+                      <input class="form-check-input mt-0" type="checkbox" name="adminColors" value="Obsidian Black" data-hex="#1A1A1A" checked>
+                      <span class="swatch-circle" style="background-color: #1A1A1A;"></span>
+                      <span class="small fw-semibold">Obsidian Black</span>
+                    </label>
+                    <label class="form-check-label d-flex align-items-center gap-2 border p-2 px-3 rounded-1 cursor-pointer">
+                      <input class="form-check-input mt-0" type="checkbox" name="adminColors" value="Camel Dune" data-hex="#C19A6B" checked>
+                      <span class="swatch-circle" style="background-color: #C19A6B;"></span>
+                      <span class="small fw-semibold">Camel Dune</span>
+                    </label>
+                    <label class="form-check-label d-flex align-items-center gap-2 border p-2 px-3 rounded-1 cursor-pointer">
+                      <input class="form-check-input mt-0" type="checkbox" name="adminColors" value="Oatmeal Heather" data-hex="#D6CFC7">
+                      <span class="swatch-circle" style="background-color: #D6CFC7;"></span>
+                      <span class="small fw-semibold">Oatmeal Heather</span>
+                    </label>
+                    <label class="form-check-label d-flex align-items-center gap-2 border p-2 px-3 rounded-1 cursor-pointer">
+                      <input class="form-check-input mt-0" type="checkbox" name="adminColors" value="Sage Green" data-hex="#8A9A86">
+                      <span class="swatch-circle" style="background-color: #8A9A86;"></span>
+                      <span class="small fw-semibold">Sage Green</span>
+                    </label>
+                    <label class="form-check-label d-flex align-items-center gap-2 border p-2 px-3 rounded-1 cursor-pointer">
+                      <input class="form-check-input mt-0" type="checkbox" name="adminColors" value="Chalk White" data-hex="#F8F8F6">
+                      <span class="swatch-circle" style="background-color: #F8F8F6;"></span>
+                      <span class="small fw-semibold">Chalk White</span>
+                    </label>
+                  </div>
+
+                  <h6 class="font-editorial fs-6 mb-3">2. Select Sizes</h6>
+                  <div class="d-flex flex-wrap gap-2 mb-4">
+                    <label class="border p-2 px-3 rounded-1 cursor-pointer">
+                      <input class="form-check-input me-1" type="checkbox" name="adminSizes" value="XS" checked> XS
+                    </label>
+                    <label class="border p-2 px-3 rounded-1 cursor-pointer">
+                      <input class="form-check-input me-1" type="checkbox" name="adminSizes" value="S" checked> S
+                    </label>
+                    <label class="border p-2 px-3 rounded-1 cursor-pointer">
+                      <input class="form-check-input me-1" type="checkbox" name="adminSizes" value="M" checked> M
+                    </label>
+                    <label class="border p-2 px-3 rounded-1 cursor-pointer">
+                      <input class="form-check-input me-1" type="checkbox" name="adminSizes" value="L" checked> L
+                    </label>
+                    <label class="border p-2 px-3 rounded-1 cursor-pointer">
+                      <input class="form-check-input me-1" type="checkbox" name="adminSizes" value="XL"> XL
+                    </label>
+                  </div>
+
+                  <button type="button" class="btn btn-outline-dark mb-4" id="generateMatrixBtn">
+                    <i class="bi bi-grid-3x3 me-1"></i> Auto-Generate SKU Permutation Matrix
+                  </button>
+
+                  <!-- Generated SKU Matrix Table -->
+                  <div id="variantMatrixContainer" class="d-none">
+                    <h6 class="small fw-bold text-uppercase mb-2">Configure SKU Permutations & Initial Quantities</h6>
+                    <div class="table-responsive mb-4">
+                      <table class="table table-bordered table-sm align-middle">
+                        <thead class="table-light small">
+                          <tr>
+                            <th>Color</th>
+                            <th>Size</th>
+                            <th>SKU Identifier</th>
+                            <th>Initial Stock Count</th>
+                          </tr>
+                        </thead>
+                        <tbody id="variantMatrixTableBody">
+                          <!-- Generated dynamically -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="border-top pt-4">
+                <button type="submit" class="btn btn-luxury-dark px-5 py-3">
+                  <i class="bi bi-check-circle me-2"></i> Save & Publish Garment
+                </button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+        <!-- 3. Customer Orders Tab -->
+        <div class="tab-pane fade" id="panelOrders" role="tabpanel">
+          <div class="card border-0 shadow-sm p-4">
+            <h5 class="font-editorial fs-5 mb-1">Customer Orders & Fulfillment</h5>
+            <p class="text-muted small mb-4">Review incoming customer orders, inspect line items, and adjust fulfillment tracking state.</p>
+
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+                <thead class="table-light small text-uppercase">
+                  <tr>
+                    <th>Order #</th>
+                    <th>Customer</th>
+                    <th>Line Items</th>
+                    <th>Total</th>
+                    <th>Fulfillment Status</th>
+                  </tr>
+                </thead>
+                <tbody id="adminOrdersTableBody">
+                  <!-- Populated by admin.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Bootstrap 5.3 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- ES6 Modules -->
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

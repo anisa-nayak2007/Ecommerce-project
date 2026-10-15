@@ -1,0 +1,509 @@
+/* ==========================================================================
+   ANISA STUDIO - COMPONENT STYLES
+   ========================================================================== */
+
+/* 1. Fashion Product Card */
+.product-card {
+  position: relative;
+  transition: var(--transition-smooth);
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--color-cream-subtle);
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+/* Secondary image hover reveal */
+.product-image-secondary {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover .product-image-secondary {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+/* Product Badges */
+.badge-luxury {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: var(--color-obsidian);
+  color: #FFFFFF;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 9px;
+  z-index: 3;
+}
+
+.badge-sale {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: var(--color-accent-terracotta);
+  color: #FFFFFF;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 9px;
+  z-index: 3;
+}
+
+/* Quick Add Overlay */
+.quick-add-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(17, 18, 21, 0.92);
+  color: #FFFFFF;
+  border: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 12px;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: var(--transition-smooth);
+  z-index: 4;
+}
+
+.product-card:hover .quick-add-btn {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.quick-add-btn:hover {
+  background-color: var(--color-obsidian);
+}
+
+/* Product Card Metadata */
+.product-meta {
+  padding: 14px 4px 6px 4px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-category-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7A7D84;
+  margin-bottom: 4px;
+}
+
+.product-title {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-obsidian);
+  margin-bottom: 6px;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-price-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.price-current {
+  color: var(--color-obsidian);
+}
+
+.price-compare {
+  color: #9A9DA2;
+  text-decoration: line-through;
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+/* Color Swatches on Product Card */
+.swatch-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.swatch-circle {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.swatch-circle:hover,
+.swatch-circle.active {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 3px var(--color-obsidian);
+}
+
+/* 2. Slide-Over Offcanvas Cart Drawer */
+.cart-drawer {
+  width: 100% !important;
+  max-width: 440px !important;
+  border-left: 1px solid var(--color-border);
+}
+
+.cart-drawer-header {
+  border-bottom: 1px solid var(--color-border);
+  padding: 20px 24px;
+}
+
+.cart-drawer-title {
+  font-family: var(--font-editorial);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.cart-drawer-body {
+  padding: 20px 24px;
+  overflow-y: auto;
+}
+
+.free-shipping-bar {
+  background: var(--color-cream-subtle);
+  border: 1px solid var(--color-border);
+  padding: 12px 16px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.progress-luxury {
+  height: 5px;
+  background-color: #E2DDD6;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar-luxury {
+  background-color: var(--color-obsidian);
+  transition: width 0.4s ease;
+}
+
+/* Cart Item List */
+.cart-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cart-item-img {
+  width: 76px;
+  height: 100px;
+  object-fit: cover;
+  background: var(--color-cream-subtle);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.cart-item-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cart-item-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.cart-item-specs {
+  font-size: 0.78rem;
+  color: #6C707A;
+  margin-bottom: 8px;
+}
+
+.cart-item-qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  width: fit-content;
+}
+
+.qty-btn {
+  background: transparent;
+  border: none;
+  width: 26px;
+  height: 26px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-obsidian);
+  cursor: pointer;
+}
+
+.qty-btn:hover {
+  background: var(--color-cream-subtle);
+}
+
+.qty-val {
+  font-size: 0.8rem;
+  font-weight: 600;
+  min-width: 24px;
+  text-align: center;
+}
+
+.cart-item-remove {
+  background: transparent;
+  border: none;
+  color: #92959E;
+  font-size: 0.82rem;
+  cursor: pointer;
+  margin-left: auto;
+  transition: var(--transition-smooth);
+}
+
+.cart-item-remove:hover {
+  color: var(--color-danger);
+}
+
+.cart-drawer-footer {
+  border-top: 1px solid var(--color-border);
+  padding: 20px 24px;
+  background-color: #FFFFFF;
+}
+
+/* 3. Product Detail Page (PDP) Specifics */
+.gallery-thumbnail-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gallery-thumbnail {
+  width: 72px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  background-color: var(--color-cream-subtle);
+}
+
+.gallery-thumbnail.active,
+.gallery-thumbnail:hover {
+  border-color: var(--color-obsidian);
+}
+
+.gallery-main-view {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--color-cream-subtle);
+  position: relative;
+  cursor: zoom-in;
+}
+
+.gallery-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+/* PDP Size Buttons */
+.size-selector-btn {
+  border: 1px solid var(--color-border);
+  background: #FFFFFF;
+  color: var(--color-obsidian);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  min-width: 52px;
+  text-align: center;
+  position: relative;
+}
+
+.size-selector-btn:hover {
+  border-color: var(--color-obsidian);
+}
+
+.size-selector-btn.active {
+  background-color: var(--color-obsidian);
+  color: #FFFFFF;
+  border-color: var(--color-obsidian);
+}
+
+.size-selector-btn.sold-out {
+  color: #B4B7BD;
+  border-color: #E2E4E8;
+  background-color: #F8F9FA;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+/* Color Swatch Button on PDP */
+.color-choice-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--color-border);
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.color-choice-btn:hover,
+.color-choice-btn.active {
+  border-color: var(--color-obsidian);
+  background-color: var(--color-cream-subtle);
+  font-weight: 600;
+}
+
+/* 4. Interactive Size Guide Modal */
+.size-modal-header {
+  border-bottom: 1px solid var(--color-border);
+  padding: 20px 24px;
+}
+
+.unit-toggle-btn {
+  border: 1px solid var(--color-border);
+  background: #FFFFFF;
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.unit-toggle-btn.active {
+  background: var(--color-obsidian);
+  color: #FFFFFF;
+  border-color: var(--color-obsidian);
+}
+
+.size-table th {
+  font-family: var(--font-editorial);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background-color: var(--color-cream-subtle);
+  border-bottom: 1px solid var(--color-border);
+  padding: 12px;
+}
+
+.size-table td {
+  font-size: 0.86rem;
+  padding: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* 5. Custom Toast Alert */
+.custom-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--color-obsidian);
+  color: #FFFFFF;
+  padding: 16px 22px;
+  border-radius: 4px;
+  box-shadow: var(--shadow-lg);
+  font-size: 0.88rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2000;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: var(--transition-smooth);
+}
+
+.custom-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* 6. Checkout & Order Confirmation Details */
+.checkout-card {
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 24px;
+  margin-bottom: 20px;
+  background: #FFFFFF;
+}
+
+.order-receipt-box {
+  border: 1px dashed var(--color-border-dark);
+  background: var(--color-cream);
+  padding: 30px;
+  border-radius: 4px;
+}
+
+/* 7. Admin Matrix & Drag-Drop */
+.upload-dropzone {
+  border: 2px dashed #CBD0D8;
+  border-radius: 6px;
+  padding: 36px 20px;
+  text-align: center;
+  background: #FAFBFD;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.upload-dropzone:hover,
+.upload-dropzone.dragover {
+  border-color: var(--color-obsidian);
+  background: #F1F4F8;
+}
+
+.upload-preview-thumb {
+  width: 80px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+}

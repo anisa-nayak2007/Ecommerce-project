@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANISA STUDIO &mdash; Architectural Essentials & Contemporary Apparel</title>
+  <meta name="description" content="Discover refined contemporary tailoring, luxury wool outerwear, cashmere knits, and foundational garments crafted with architectural precision.">
+  
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="css/custom-theme.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar text-center">
+    <div class="container d-flex justify-content-between align-items-center">
+      <span class="d-none d-md-inline">Ethically Tailored &bull; Limited Run Releases</span>
+      <span class="mx-auto mx-md-0">Complimentary Express Shipping on Orders Over $100 &mdash; Code: <strong>FREESHIP</strong></span>
+      <span class="d-none d-md-inline"><a href="admin.html" class="text-white text-decoration-none">Merchant Portal &rarr;</a></span>
+    </div>
+  </div>
+
+  <!-- Luxury Navigation Bar -->
+  <nav class="navbar navbar-expand-lg luxury-navbar sticky-top">
+    <div class="container py-2">
+      <!-- Mobile Toggler -->
+      <button class="navbar-toggler border-0 p-0 me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMainContent" aria-label="Toggle navigation">
+        <i class="bi bi-list fs-2"></i>
+      </button>
+
+      <!-- Brand Logo -->
+      <a class="navbar-brand brand-logo me-4" href="index.html">
+        ANISA <span class="fw-light">STUDIO</span>
+      </a>
+
+      <!-- Navigation Links -->
+      <div class="collapse navbar-collapse" id="navbarMainContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom active" href="index.html">New Drops</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#catalogSection">Women</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#catalogSection">Men</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#catalogSection">Unisex Essentials</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#editorialStorySection">Editorial</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right Header Actions -->
+      <div class="d-flex align-items-center gap-2">
+        <div class="d-none d-sm-block position-relative">
+          <input type="text" id="catalogSearchInput" class="form-control form-control-sm rounded-pill ps-4" placeholder="Search catalog..." style="width: 190px; font-size: 0.82rem;">
+          <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-2 text-muted" style="font-size: 0.75rem;"></i>
+        </div>
+
+        <a href="admin.html" class="header-action-btn" title="Admin Inventory Portal">
+          <i class="bi bi-sliders"></i>
+        </a>
+
+        <!-- Cart Drawer Trigger Button -->
+        <button class="header-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas" aria-label="Shopping Bag">
+          <i class="bi bi-bag"></i>
+          <span class="cart-count-badge cart-badge-count" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Editorial Hero Section -->
+  <section class="hero-banner" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&q=80');">
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-tagline">AUTUMN / WINTER 2026</span>
+        <h1 class="hero-title">Architectural Silhouettes & Heavyweight Textures</h1>
+        <p class="hero-subtitle">
+          Engineered garments designed with clean geometric volume, organic Italian wools, and purposeful minimalism. Built to endure seasons, not trends.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="#catalogSection" class="btn btn-luxury-dark">Explore Collection</a>
+          <a href="product.html?slug=double-breasted-wool-trench-coat" class="btn btn-luxury-outline text-white border-white">Featured Trench &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Category Pills Ticker -->
+  <section class="py-4 border-bottom bg-white">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+        <span class="small fw-bold text-uppercase letter-spacing-1 text-muted d-none d-md-block">Browse Collections:</span>
+        <div class="d-flex flex-wrap gap-2" id="categoryFilterPills">
+          <!-- Dynamic Pills populated via JS -->
+          <button class="category-pill category-filter-btn active" data-category="all">All Styles</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Storefront Catalog Section -->
+  <section class="py-5" id="catalogSection">
+    <div class="container">
+      <div class="row g-4">
+        
+        <!-- Left Column: Faceted Filter Sidebar -->
+        <div class="col-lg-3 d-none d-lg-block">
+          <div class="p-4 border rounded-1 bg-white sticky-top" style="top: 90px;">
+            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+              <h5 class="font-editorial mb-0 fs-6 text-uppercase">Filters</h5>
+              <button class="btn btn-sm btn-link text-muted p-0 text-decoration-none" id="resetFiltersBtn">Reset All</button>
+            </div>
+
+            <!-- Gender Facet -->
+            <div class="mb-4">
+              <label class="form-label small fw-bold text-uppercase mb-2">Department</label>
+              <div class="form-check mb-1">
+                <input class="form-check-input" type="radio" name="genderFilter" id="genderAll" value="all" checked>
+                <label class="form-check-label small" for="genderAll">All Departments</label>
+              </div>
+              <div class="form-check mb-1">
+                <input class="form-check-input" type="radio" name="genderFilter" id="genderWomen" value="women">
+                <label class="form-check-label small" for="genderWomen">Women's Collection</label>
+              </div>
+              <div class="form-check mb-1">
+                <input class="form-check-input" type="radio" name="genderFilter" id="genderMen" value="men">
+                <label class="form-check-label small" for="genderMen">Men's Collection</label>
+              </div>
+              <div class="form-check mb-1">
+                <input class="form-check-input" type="radio" name="genderFilter" id="genderUnisex" value="unisex">
+                <label class="form-check-label small" for="genderUnisex">Unisex Studio Cuts</label>
+              </div>
+            </div>
+
+            <!-- Price Range Facet -->
+            <div class="mb-4 pb-2 border-bottom">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <label for="priceRangeSlider" class="form-label small fw-bold text-uppercase mb-0">Max Price</label>
+                <span class="small fw-bold" id="priceRangeValue">$350</span>
+              </div>
+              <input type="range" class="form-range" min="40" max="350" step="10" value="350" id="priceRangeSlider">
+              <div class="d-flex justify-content-between text-muted" style="font-size: 0.72rem;">
+                <span>$40</span>
+                <span>$350+</span>
+              </div>
+            </div>
+
+            <!-- In-Stock Only Toggle -->
+            <div class="form-check form-switch mb-3">
+              <input class="form-check-input" type="checkbox" role="switch" id="inStockOnlyToggle">
+              <label class="form-check-label small fw-semibold" for="inStockOnlyToggle">In-Stock Only</label>
+            </div>
+
+            <!-- Value Props Box -->
+            <div class="p-3 bg-light mt-4 rounded-1">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-box-seam text-dark"></i>
+                <span class="small fw-bold">Free Returns</span>
+              </div>
+              <p class="text-muted mb-0" style="font-size: 0.76rem;">30-day effortless returns and complimentary size exchanges.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Results & Product Grid -->
+        <div class="col-lg-9">
+          <!-- Catalog Toolbar -->
+          <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+            <span class="small text-muted fw-semibold" id="productCountDisplay">Loading items...</span>
+            <div class="d-flex align-items-center gap-2">
+              <label for="catalogSortSelect" class="small text-muted text-nowrap d-none d-sm-inline">Sort By:</label>
+              <select class="form-select form-select-sm" id="catalogSortSelect" style="width: auto; font-size: 0.82rem;">
+                <option value="featured">Featured Drops</option>
+                <option value="newest">New Arrivals</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Product Grid Container -->
+          <div class="row g-4" id="productGrid">
+            <!-- Rendered dynamically by store.js -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial Brand Story Section -->
+  <section class="py-5 bg-light" id="editorialStorySection">
+    <div class="container py-4">
+      <div class="row align-items-center g-5">
+        <div class="col-md-6">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=80" alt="Atelier Craftsmanship" class="img-fluid rounded-1 shadow-sm">
+        </div>
+        <div class="col-md-6">
+          <span class="small fw-bold text-uppercase letter-spacing-2 text-muted mb-2 d-block">THE ATELIER PHILOSOPHY</span>
+          <h2 class="font-editorial mb-4">Precision Patterns, Responsibly Sourced Fibers</h2>
+          <p class="text-muted mb-3">
+            Every garment in our catalog originates in our independent design workshop. We partner with legacy textile mills in Biella, Italy and Okayama, Japan to secure premium virgin wools, organic long-staple cottons, and genuine vegetable-tanned leathers.
+          </p>
+          <p class="text-muted mb-4">
+            By producing strictly limited seasonal batches, we avoid deadstock waste and uphold uncompromising stitching standards across all pieces.
+          </p>
+          <div class="row g-3 text-center text-md-start">
+            <div class="col-4">
+              <div class="fs-4 fw-bold font-editorial">100%</div>
+              <div class="small text-muted">Natural Fibers</div>
+            </div>
+            <div class="col-4">
+              <div class="fs-4 fw-bold font-editorial">Zero</div>
+              <div class="small text-muted">Deadstock Plastic</div>
+            </div>
+            <div class="col-4">
+              <div class="fs-4 fw-bold font-editorial">30 Days</div>
+              <div class="small text-muted">Free Fit Exchanges</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Universal Offcanvas Slide-Over Cart Drawer -->
+  <div class="offcanvas offcanvas-end cart-drawer" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header cart-drawer-header">
+      <h5 class="offcanvas-title cart-drawer-title" id="cartOffcanvasLabel">
+        Shopping Bag (<span class="cart-badge-count">0</span>)
+      </h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    
+    <div class="offcanvas-body cart-drawer-body">
+      <!-- Free Shipping Meter -->
+      <div class="free-shipping-bar">
+        <div class="small mb-2 text-center" id="freeShippingText">
+          Add $100.00 more to qualify for Free Shipping
+        </div>
+        <div class="progress progress-luxury">
+          <div class="progress-bar progress-bar-luxury" id="freeShippingProgress" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div id="cartDrawerEmpty" class="text-center py-5 d-none">
+        <i class="bi bi-bag-x fs-1 text-muted mb-3 d-block"></i>
+        <h6 class="font-editorial mb-2">Your Bag is Empty</h6>
+        <p class="text-muted small mb-4">You haven't added any garments to your bag yet.</p>
+        <button class="btn btn-luxury-dark" data-bs-dismiss="offcanvas">Explore Collection</button>
+      </div>
+
+      <!-- Cart Items Container -->
+      <div id="cartDrawerItems">
+        <!-- Rendered by cart.js -->
+      </div>
+    </div>
+
+    <!-- Cart Footer with Totals & Checkout Trigger -->
+    <div class="cart-drawer-footer" id="cartDrawerFooter">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <span class="text-muted small">Subtotal</span>
+        <span class="fw-bold fs-5" id="cartDrawerSubtotal">$0.00</span>
+      </div>
+      <p class="text-muted" style="font-size: 0.75rem;">Shipping and taxes calculated at checkout.</p>
+      <a href="checkout.html" class="btn btn-luxury-dark w-100 py-3">
+        Proceed to Checkout &rarr;
+      </a>
+    </div>
+  </div>
+
+  <!-- Luxury Footer -->
+  <footer class="luxury-footer">
+    <div class="container">
+      <div class="row g-4 mb-5">
+        <div class="col-lg-4 col-md-6">
+          <h5 class="brand-logo text-white mb-3">ANISA <span class="fw-light">STUDIO</span></h5>
+          <p class="small text-muted pe-lg-4">
+            An independent design house crafting architectural wardrobe essentials, structured outerwear, and modern silhouettes for deliberate living.
+          </p>
+          <div class="d-flex gap-3 fs-5 mt-3">
+            <a href="#" class="text-muted"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-muted"><i class="bi bi-pinterest"></i></a>
+            <a href="#" class="text-muted"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6">
+          <h6 class="footer-heading">Collections</h6>
+          <a href="#catalogSection" class="footer-link">Outerwear</a>
+          <a href="#catalogSection" class="footer-link">Knitwear</a>
+          <a href="#catalogSection" class="footer-link">Tops & Shirts</a>
+          <a href="#catalogSection" class="footer-link">Trousers & Denim</a>
+          <a href="#catalogSection" class="footer-link">Accessories</a>
+        </div>
+
+        <div class="col-lg-2 col-6">
+          <h6 class="footer-heading">Client Care</h6>
+          <a href="product.html?slug=double-breasted-wool-trench-coat" class="footer-link">Fit & Size Guide</a>
+          <a href="order-confirmation.html?orderNumber=ORD-2026-7842" class="footer-link">Track Your Order</a>
+          <a href="#" class="footer-link">Returns & Exchanges</a>
+          <a href="#" class="footer-link">Garment Care</a>
+          <a href="admin.html" class="footer-link">Merchant Portal</a>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <h6 class="footer-heading">The Atelier Dispatch</h6>
+          <p class="small text-muted mb-3">Receive private access to small-batch drops, private lookbooks, and archival sales.</p>
+          <form class="d-flex gap-2" onsubmit="event.preventDefault(); alert('Thank you for subscribing to ANISA STUDIO.');">
+            <input type="email" class="form-control newsletter-input" placeholder="Your email address" required>
+            <button type="submit" class="btn btn-luxury-dark text-nowrap px-3">Join</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="pt-4 border-top border-secondary border-opacity-25 d-flex flex-wrap justify-content-between align-items-center small text-muted">
+        <div>&copy; 2026 ANISA STUDIO. All Rights Reserved.</div>
+        <div class="d-flex gap-3 mt-2 mt-sm-0">
+          <a href="#" class="text-muted">Privacy Policy</a>
+          <a href="#" class="text-muted">Terms of Service</a>
+          <a href="#" class="text-muted">Accessibility</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5.3 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- ES6 Modules -->
+  <script type="module" src="js/cart.js"></script>
+  <script type="module" src="js/store.js"></script>
+</body>
+</html>
